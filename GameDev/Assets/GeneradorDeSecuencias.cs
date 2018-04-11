@@ -7,16 +7,58 @@ public class GeneradorDeSecuencias : MonoBehaviour {
 	public GameObject patronA;
 	public GameObject patronB;
 	public GameObject patronC;
+	public int tipo;
 	// Use this for initialization
 	void Start () {
-		//Generar algun tipo de patron
-		Instantiate(patronA);
-		Instantiate (patronB);
-		Instantiate (patronC);
+		tipo = 3;
+		//llamar a la funcion genera patron
+		GeneraPatron(tipo);
+
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update () 
+	{
+		DetectaTeclas (tipo);
 	}
+	public void DetectaTeclas (int tipo)
+	{
+		
+		if (Input.GetKey (KeyCode.UpArrow)) 
+		{
+			//condicion para evitar crear patrones iguales simulaciones
+			if (!GameObject.Find ("patronB(Clone)"))
+			tipo = 2;
+			GeneraPatron (tipo);
+		}
+		if (Input.GetKey (KeyCode.LeftArrow)) 
+		{
+			if (!GameObject.Find ("patronA(Clone)"))
+			tipo = 1;
+			GeneraPatron (tipo);
+		}
+		if (Input.GetKey (KeyCode.RightArrow)) 
+		{
+			if (!GameObject.Find ("patronC(Clone)"))
+			tipo = 3;
+			GeneraPatron (tipo);
+		}
+	}
+	public void GeneraPatron (int tipo){
+
+		//Generar algun tipo de patron
+		if (tipo == 1) {
+			Instantiate (patronA);
+		}
+		if (tipo == 2) {
+			Instantiate (patronB);
+		}
+
+		if (tipo == 3) {
+			Instantiate (patronC);
+		}
+
+    }
 }
+
+
